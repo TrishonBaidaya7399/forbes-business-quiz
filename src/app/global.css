@@ -1,0 +1,455 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-orange-50: var(--orange-50);
+  --color-orange-100: var(--orange-100);
+  --color-orange-200: var(--orange-200);
+  --color-orange-300: var(--orange-300);
+  --color-orange-400: var(--orange-400);
+  --color-orange-500: var(--orange-500);
+  --color-orange-600: var(--orange-600);
+  --color-orange-700: var(--orange-700);
+  --color-orange-800: var(--orange-800);
+  --color-orange-900: var(--orange-900);
+  --color-orange-950: var(--orange-950);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Light theme - Forbes Business Club colors */
+  --background: oklch(0.98 0.005 85);
+  --foreground: oklch(0.15 0.02 85);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 85);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 85);
+  --primary: oklch(0.15 0.02 85);
+  --primary-foreground: oklch(0.98 0.005 85);
+  --secondary: oklch(0.96 0.01 85);
+  --secondary-foreground: oklch(0.15 0.02 85);
+  --muted: oklch(0.96 0.01 85);
+  --muted-foreground: oklch(0.45 0.015 85);
+  --accent: oklch(0.96 0.01 85);
+  --accent-foreground: oklch(0.15 0.02 85);
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.98 0.005 85);
+  --border: oklch(0.89 0.01 85);
+  --input: oklch(0.89 0.01 85);
+  --ring: oklch(0.15 0.02 85);
+
+  /* Orange color palette for Forbes branding */
+  --orange-50: oklch(0.97 0.02 65);
+  --orange-100: oklch(0.93 0.05 65);
+  --orange-200: oklch(0.87 0.08 65);
+  --orange-300: oklch(0.79 0.12 65);
+  --orange-400: oklch(0.71 0.15 65);
+  --orange-500: oklch(0.63 0.18 65);
+  --orange-600: oklch(0.55 0.2 65);
+  --orange-700: oklch(0.47 0.18 65);
+  --orange-800: oklch(0.39 0.15 65);
+  --orange-900: oklch(0.31 0.12 65);
+  --orange-950: oklch(0.23 0.08 65);
+
+  /* Chart colors */
+  --chart-1: oklch(0.55 0.2 65);
+  --chart-2: oklch(0.63 0.18 65);
+  --chart-3: oklch(0.71 0.15 65);
+  --chart-4: oklch(0.79 0.12 65);
+  --chart-5: oklch(0.87 0.08 65);
+
+  /* Sidebar colors */
+  --sidebar: oklch(0.98 0.005 85);
+  --sidebar-foreground: oklch(0.15 0.02 85);
+  --sidebar-primary: oklch(0.15 0.02 85);
+  --sidebar-primary-foreground: oklch(0.98 0.005 85);
+  --sidebar-accent: oklch(0.96 0.01 85);
+  --sidebar-accent-foreground: oklch(0.15 0.02 85);
+  --sidebar-border: oklch(0.89 0.01 85);
+  --sidebar-ring: oklch(0.15 0.02 85);
+}
+
+.dark {
+  /* Dark theme - Forbes Business Club dark colors */
+  --background: oklch(0.08 0.01 85);
+  --foreground: oklch(0.98 0.005 85);
+  --card: oklch(0.12 0.015 85);
+  --card-foreground: oklch(0.98 0.005 85);
+  --popover: oklch(0.12 0.015 85);
+  --popover-foreground: oklch(0.98 0.005 85);
+  --primary: oklch(0.98 0.005 85);
+  --primary-foreground: oklch(0.08 0.01 85);
+  --secondary: oklch(0.16 0.02 85);
+  --secondary-foreground: oklch(0.98 0.005 85);
+  --muted: oklch(0.16 0.02 85);
+  --muted-foreground: oklch(0.65 0.01 85);
+  --accent: oklch(0.16 0.02 85);
+  --accent-foreground: oklch(0.98 0.005 85);
+  --destructive: oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(0.98 0.005 85);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.65 0.01 85);
+
+  /* Orange colors for dark theme */
+  --orange-50: oklch(0.23 0.08 65);
+  --orange-100: oklch(0.31 0.12 65);
+  --orange-200: oklch(0.39 0.15 65);
+  --orange-300: oklch(0.47 0.18 65);
+  --orange-400: oklch(0.55 0.2 65);
+  --orange-500: oklch(0.63 0.18 65);
+  --orange-600: oklch(0.71 0.15 65);
+  --orange-700: oklch(0.79 0.12 65);
+  --orange-800: oklch(0.87 0.08 65);
+  --orange-900: oklch(0.93 0.05 65);
+  --orange-950: oklch(0.97 0.02 65);
+
+  /* Chart colors for dark theme */
+  --chart-1: oklch(0.71 0.15 65);
+  --chart-2: oklch(0.63 0.18 65);
+  --chart-3: oklch(0.55 0.2 65);
+  --chart-4: oklch(0.47 0.18 65);
+  --chart-5: oklch(0.39 0.15 65);
+
+  /* Sidebar colors for dark theme */
+  --sidebar: oklch(0.12 0.015 85);
+  --sidebar-foreground: oklch(0.98 0.005 85);
+  --sidebar-primary: oklch(0.71 0.15 65);
+  --sidebar-primary-foreground: oklch(0.08 0.01 85);
+  --sidebar-accent: oklch(0.16 0.02 85);
+  --sidebar-accent-foreground: oklch(0.98 0.005 85);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.65 0.01 85);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: "Didot", "Playfair Display", "Georgia", serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+
+  /* Focus styles */
+  .focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Selection styles */
+  ::selection {
+    @apply bg-orange-200 text-orange-900;
+  }
+
+  .dark ::selection {
+    @apply bg-orange-800 text-orange-100;
+  }
+}
+
+@layer components {
+  /* Forbes Business Club specific styles */
+  .forbes-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.08 0.01 85) 0%,
+      oklch(0.12 0.015 85) 50%,
+      oklch(0.08 0.01 85) 100%
+    );
+  }
+
+  .forbes-text-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.55 0.2 65),
+      oklch(0.71 0.15 65)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Animated gradient background for header */
+  .bg-gradient-animated {
+    background: linear-gradient(
+      90deg,
+      rgba(139, 87, 40, 1) 0%,
+      rgba(211, 152, 101, 1) 25%,
+      rgba(139, 87, 40, 1) 50%,
+      rgba(211, 152, 101, 1) 75%,
+      rgba(139, 87, 40, 1) 100%
+    );
+    background-size: 200% 100%;
+    animation: gradientMove 4s ease-in-out infinite;
+  }
+
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .dark .glass-effect {
+    @apply bg-black/20 backdrop-blur-md border border-white/10;
+  }
+
+  /* Button variants */
+  .btn-forbes {
+    @apply bg-orange-600 hover:bg-orange-700 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
+  }
+
+  .btn-forbes-outline {
+    @apply border-2 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white font-medium px-6 py-3 rounded-lg transition-all duration-300;
+  }
+
+  /* Card styles */
+  .card-forbes {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl shadow-lg;
+  }
+
+  /* Quiz rating scale styles */
+  .rating-scale-border {
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      white 20%,
+      white 80%,
+      transparent 100%
+    );
+  }
+
+  .rating-scale-indicator {
+    height: 4px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      white 10%,
+      white 20%,
+      white 30%,
+      white 40%,
+      white 50%,
+      white 60%,
+      white 70%,
+      white 80%,
+      white 90%,
+      transparent 100%
+    );
+    opacity: 0.8;
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Responsive text utilities */
+  .text-responsive-xs {
+    @apply text-xs sm:text-sm;
+  }
+
+  .text-responsive-sm {
+    @apply text-sm sm:text-base;
+  }
+
+  .text-responsive-base {
+    @apply text-base sm:text-lg;
+  }
+
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+
+  .text-responsive-xl {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+
+  .text-responsive-2xl {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  /* Spacing utilities */
+  .space-y-responsive {
+    @apply space-y-4 sm:space-y-6 md:space-y-8;
+  }
+
+  .p-responsive {
+    @apply p-4 sm:p-6 md:p-8;
+  }
+
+  .px-responsive {
+    @apply px-4 sm:px-6 md:px-8;
+  }
+
+  .py-responsive {
+    @apply py-4 sm:py-6 md:py-8;
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse-orange {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.55 0.2 65 / 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px oklch(0.55 0.2 65 / 0);
+  }
+}
+
+.animate-pulse-orange {
+  animation: pulse-orange 2s infinite;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    @apply text-black bg-white;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: oklch(0.5 0 0);
+    --ring: oklch(0.2 0 0);
+  }
+
+  .dark {
+    --border: oklch(0.7 0 0);
+    --ring: oklch(0.8 0 0);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
