@@ -78,47 +78,46 @@ export default function QuizPage() {
               </h2>
 
               {/* Rating scale with numbers in a line and thin-to-fatty-to-thin border */}
-              <div className="flex flex-col items-center mb-12">
-                {/* Numbers in a line */}
-                <div className="flex justify-between w-full max-w-md mb-2">
-                  {[1, 2, 3, 4, 5].map((num) => (
-                    <div key={num} className="text-white text-lg font-medium">
-                      {num}
-                    </div>
-                  ))}
-                </div>
+              {/* Labels */}
+              <div className="flex gap-4 md:gap-10 lg:gap-[80px] w-full mt-2 justify-center items-center">
+                <span className="text-white text-xs h-fit">
+                  Egyáltalán nem értek egyet
+                </span>
+                <div className="flex flex-col items-center">
+                  {/* Numbers in a line */}
+                  <div className="flex justify-between gap-4 lg:gap-8 w-full max-w-md mb-2">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <div key={num} className="text-white text-lg font-medium">
+                        {num}
+                      </div>
+                    ))}
+                  </div>
 
-                {/* Thin-to-fatty-to-thin border */}
-                <div className="w-full max-w-md h-1 bg-gradient-to-r from-transparent via-white to-transparent mb-6"></div>
+                  {/* Thin-to-fatty-to-thin border */}
+                  <div className="w-full max-w-md h-1 bg-gradient-to-r from-transparent via-white to-transparent mb-6"></div>
 
-                {/* Radio buttons below */}
-                <div className="flex justify-between w-full max-w-md">
-                  {[1, 2, 3, 4, 5].map((num) => (
-                    <button
-                      key={num}
-                      onClick={() => handleAnswerSelect(num.toString())}
-                      className="flex flex-col items-center"
-                    >
-                      <div
-                        className={`w-6 h-6 rounded-full border-2 border-white transition-all duration-300 ${
-                          selectedOption === num.toString()
-                            ? "bg-white"
-                            : "bg-transparent hover:bg-white/20"
-                        }`}
-                      />
-                    </button>
-                  ))}
+                  {/* Radio buttons below */}
+                  <div className="flex justify-between gap-8 w-full max-w-md">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <button
+                        key={num}
+                        onClick={() => handleAnswerSelect(num.toString())}
+                        className="flex flex-col items-center"
+                      >
+                        <div
+                          className={`w-6 h-6 rounded-full border-2 border-white transition-all duration-300 ${
+                            selectedOption === num.toString()
+                              ? "bg-white"
+                              : "bg-transparent hover:bg-white/20"
+                          }`}
+                        />
+                      </button>
+                    ))}
+                  </div>
                 </div>
-
-                {/* Labels */}
-                <div className="flex justify-between w-full max-w-md mt-2">
-                  <span className="text-white text-xs">
-                    Egyáltalán nem értek egyet
-                  </span>
-                  <span className="text-white text-xs">
-                    Teljes mértékben egyetértek
-                  </span>
-                </div>
+                <span className="text-white text-xs h-fit">
+                  Teljes mértékben egyetértek
+                </span>
               </div>
             </div>
           </motion.div>
@@ -157,8 +156,8 @@ export default function QuizPage() {
       </div>
 
       {/* Footer */}
-      <footer className="mt-12">
-        <p className="text-white text-xs">
+      <footer className="mt-12 w-full">
+        <p className="text-white text-xs w-full text-end">
           by Viktor Lenartson, Copyright ZEL Group
         </p>
       </footer>

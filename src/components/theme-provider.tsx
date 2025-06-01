@@ -30,9 +30,9 @@ export function ThemeProvider({
   children,
   defaultTheme = "system",
   storageKey = "forbes-ui-theme",
-  attribute = "class",
-  enableSystem = true,
-  disableTransitionOnChange = false,
+  // attribute = "class",
+  // enableSystem = true,
+  // disableTransitionOnChange = false,
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
