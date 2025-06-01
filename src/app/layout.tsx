@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./global.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { BackgroundWrapper } from "@/components/background-wrapper";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,19 +26,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          <div className="relative min-h-screen">
-            {/* Background image */}
-            <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-              style={{ backgroundImage: "url('/background/bg_primary.jpg')" }}
-            />
-
-            {/* Black overlay */}
-            <div className="absolute inset-0 bg-black/60 z-10"></div>
-
-            {/* Content */}
-            <div className="relative z-20 min-h-screen">{children}</div>
-          </div>
+          <BackgroundWrapper>{children}</BackgroundWrapper>
         </ThemeProvider>
       </body>
     </html>

@@ -241,6 +241,45 @@
     animation: gradientMove 4s ease-in-out infinite;
   }
 
+  /* Animated border card */
+  .animated-border-card {
+    position: relative;
+    padding: 1px;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .animated-border-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(
+      from 0deg at 50% 50%,
+      rgba(211, 152, 101, 0.8) 0deg,
+      rgba(139, 87, 40, 0.4) 90deg,
+      rgba(139, 87, 40, 0.2) 180deg,
+      rgba(139, 87, 40, 0.4) 270deg,
+      rgba(211, 152, 101, 0.8) 360deg
+    );
+    border-radius: 1rem;
+    z-index: 0;
+    animation: rotateBorder 8s linear infinite;
+  }
+
+  .animated-border-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 0% 0%,
+      transparent 0%,
+      rgba(0, 0, 0, 0.8) 80%
+    );
+    border-radius: 1rem;
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+
   .glass-effect {
     @apply bg-white/10 backdrop-blur-md border border-white/20;
   }
@@ -401,6 +440,15 @@
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@keyframes rotateBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 

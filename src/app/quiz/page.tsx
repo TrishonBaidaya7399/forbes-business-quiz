@@ -85,7 +85,7 @@ export default function QuizPage() {
                 </span>
                 <div className="flex flex-col items-center">
                   {/* Numbers in a line */}
-                  <div className="flex justify-between gap-4 lg:gap-8 w-full max-w-md mb-2">
+                  <div className="flex justify-between gap-2 md:gap-4 lg:gap-8 w-full mb-2">
                     {[1, 2, 3, 4, 5].map((num) => (
                       <div key={num} className="text-white text-lg font-medium">
                         {num}
@@ -94,10 +94,10 @@ export default function QuizPage() {
                   </div>
 
                   {/* Thin-to-fatty-to-thin border */}
-                  <div className="w-full max-w-md h-1 bg-gradient-to-r from-transparent via-white to-transparent mb-6"></div>
+                  <div className="w-full h-1 bg-gradient-to-r from-transparent via-white to-transparent mb-6"></div>
 
                   {/* Radio buttons below */}
-                  <div className="flex justify-between gap-8 w-full max-w-md">
+                  <div className="flex justify-between gap-2 md:gap-4 lg:gap-8 w-full">
                     {[1, 2, 3, 4, 5].map((num) => (
                       <button
                         key={num}
@@ -156,11 +156,17 @@ export default function QuizPage() {
       </div>
 
       {/* Footer */}
-      <footer className="mt-12 w-full">
-        <p className="text-white text-xs w-full text-end">
+      {/* Footer */}
+      <motion.footer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.9 }}
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6"
+      >
+        <p className="text-white text-xs">
           by Viktor Lenartson, Copyright ZEL Group
         </p>
-      </footer>
+      </motion.footer>
     </div>
   );
 }
