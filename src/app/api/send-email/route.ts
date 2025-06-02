@@ -1,5 +1,6 @@
-import { generateEmailTemplate } from "@/lib/email.template";
 import { type NextRequest, NextResponse } from "next/server";
+import mailgun from "mailgun-js";
+import { generateEmailTemplate } from "@/lib/email.template";
 
 export async function POST(request: NextRequest) {
   try {
@@ -7,25 +8,35 @@ export async function POST(request: NextRequest) {
 
     // Generate HTML email template with specified theme
     const htmlTemplate = generateEmailTemplate(userData, results, theme);
-    console.log(htmlTemplate);
-    // Here you would integrate with Mailgun
-    // For now, we'll simulate the email sending
-    console.log("Sending email to:", userData.email);
-    console.log("Email theme:", theme);
-    console.log("Email template generated");
 
-    // Mailgun integration would go here:
-    // const mailgun = require('mailgun-js')({
-    //   apiKey: process.env.MAILGUN_API_KEY,
-    //   domain: process.env.MAILGUN_DOMAIN
-    // })
+    // Initialize Mailgun with environment variables
+    const mg = mailgun({
+      apiKey: process.env.MAILGUN_API_KEY || "",
+      domain: process.env.MAILGUN_DOMAIN || "",
+    });
 
-    // await mailgun.messages().send({
-    //   from: 'Forbes Business Club <noreply@forbesbusinessclub.com>',
-    //   to: userData.email,
-    //   subject: `Az Ön adaptív vezető felmérés eredménye (${theme === 'dark' ? 'Sötét' : 'Világos'} téma)`,
-    //   html: htmlTemplate
-    // })
+    // Prepare email data
+    const data = {
+      from: `Forbes Business Club <noreply@${process.env.MAILGUN_DOMAIN}>`,
+      to: userData.email,
+      subject: `Az Ön adaptív vezető felmérés eredménye (${
+        theme === "dark" ? "Sötét" : "Világos"
+      } téma)`,
+      html: htmlTemplate,
+    };
+
+    // Send email
+    await new Promise((resolve, reject) => {
+      mg.messages().send(data, (error, body) => {
+        if (error) {
+          console.error("Mailgun error:", error);
+          reject(error);
+        } else {
+          console.log("Email sent successfully:", body);
+          resolve(body);
+        }
+      });
+    });
 
     return NextResponse.json({
       success: true,

@@ -1,54 +1,49 @@
-import { quizData } from "./quiz-data"
+import { quizData } from "./quiz-data";
 
-export interface QuizResult {
-  totalQuestions: number
-  correctAnswers: number
-  wrongAnswers: number
-  score: number
-  percentage: number
-  answers: Array<{
-    questionId: number
-    question: string
-    userAnswer: string
-    correctAnswer: string
-    isCorrect: boolean
-    options: Array<{ id: string; text: string }>
-  }>
+export interface SurveyResponse {
+  totalQuestions: number;
+  responses: Array<{
+    questionId: number;
+    question: string;
+    userResponse: string;
+    responseText: string;
+    options: Array<{ id: string; text: string }>;
+  }>;
+  averageScore: number;
 }
 
-export function calculateResults(userAnswers: Record<number, string>): QuizResult {
-  let correctCount = 0
-  const detailedAnswers = []
+export function calculateSurveyResults(
+  userAnswers: Record<number, string>
+): SurveyResponse {
+  const detailedResponses = [];
+  let totalScore = 0;
 
   for (let i = 0; i < quizData.questions.length; i++) {
-    const question = quizData.questions[i]
-    const userAnswer = userAnswers[i]
-    const isCorrect = userAnswer === question.correctAnswer
+    const question = quizData.questions[i];
+    const userResponse = userAnswers[i];
+    const responseOption = question.options.find(
+      (opt) => opt.id === userResponse
+    );
 
-    if (isCorrect) {
-      correctCount++
-    }
+    // Convert response to numeric value for average calculation
+    const numericValue = Number.parseInt(userResponse) || 0;
+    totalScore += numericValue;
 
-    detailedAnswers.push({
+    detailedResponses.push({
       questionId: question.id,
       question: question.question,
-      userAnswer: userAnswer || "",
-      correctAnswer: question.correctAnswer,
-      isCorrect,
+      userResponse: userResponse || "",
+      responseText: responseOption?.text || "",
       options: question.options,
-    })
+    });
   }
 
-  const totalQuestions = quizData.questions.length
-  const wrongAnswers = totalQuestions - correctCount
-  const percentage = Math.round((correctCount / totalQuestions) * 100)
+  const totalQuestions = quizData.questions.length;
+  const averageScore = totalQuestions > 0 ? totalScore / totalQuestions : 0;
 
   return {
     totalQuestions,
-    correctAnswers: correctCount,
-    wrongAnswers,
-    score: correctCount,
-    percentage,
-    answers: detailedAnswers,
-  }
+    responses: detailedResponses,
+    averageScore: Math.round(averageScore * 100) / 100, // Round to 2 decimal places
+  };
 }
