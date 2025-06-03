@@ -25,7 +25,7 @@ export default function AdminLoginPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>();
-  // console.log({ NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL });
+  console.log({ NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL });
   const onSubmit = async (data: LoginFormData) => {
     setIsSubmitting(true);
     setLoginError("");
