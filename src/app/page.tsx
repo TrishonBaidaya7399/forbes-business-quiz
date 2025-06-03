@@ -11,12 +11,12 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header with social icons */}
-      <header className="relative overflow-hidden">
+      <header className="relative overflow-hidden h-12">
         {/* Animated gradient background */}
         <div className="absolute inset-0 bg-gradient-animated"></div>
 
         {/* Content */}
-        <div className="relative z-10 flex justify-end p-4 md:p-6">
+        <div className="relative z-10 flex justify-end items-center h-12 px-4 md:px-6">
           <div className="flex space-x-4">
             <Instagram className="w-5 h-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
             <Facebook className="w-5 h-5 text-white hover:text-yellow-500 cursor-pointer transition-colors" />
@@ -91,7 +91,10 @@ export default function LandingPage() {
           >
             <Button
               onClick={() => router.push("/quiz")}
-              className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 text-lg rounded-md transition-all duration-300 transform hover:scale-105"
+              className="text-white px-8 py-3 text-lg rounded-sm transition-all duration-300 transform hover:scale-105 w-fit md:w-[300px] lg:w-[380px] h-[58px]"
+              style={{
+                background: "linear-gradient(to right, #8C5728, #CD935F)",
+              }}
             >
               Kitöltöm
             </Button>
@@ -110,11 +113,16 @@ export default function LandingPage() {
       </div>
 
       {/* Footer */}
-      <footer className="p-4 md:p-6">
-        <p className="text-white text-xs text-right">
+      <motion.footer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.9 }}
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6"
+      >
+        <p className="text-white text-xs">
           by Viktor Lenartson, Copyright ZEL Group
         </p>
-      </footer>
+      </motion.footer>
     </div>
   );
 }

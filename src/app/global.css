@@ -169,8 +169,8 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: "Didot", "Playfair Display", "Georgia", serif;
+    @apply bg-background text-foreground antialiased;
+    font-family: "Didot", "Playfair Display", "Georgia", serif !important;
   }
 
   /* Custom scrollbar */

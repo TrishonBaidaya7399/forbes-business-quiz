@@ -12,6 +12,7 @@ export default function QuizPage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [selectedOption, setSelectedOption] = useState<string>("");
+  console.log({ answers });
 
   useEffect(() => {
     setSelectedOption(answers[currentQuestion] || "");
@@ -25,12 +26,85 @@ export default function QuizPage() {
     }));
   };
 
+  // Function to calculate category-based results
+  const calculateCategoryResults = () => {
+    const categoryResults: { [key: string]: {
+      category: string;
+      value: number;
+      totalQuestions: number;
+      totalScore: number;
+      maxScore: number;
+    } } = {};
+
+    // Group questions by category
+    const questionsByCategory: { [key: string]: { questionIndex: number; question: typeof quizData.questions[number] }[] } = {};
+    quizData.questions.forEach((question, index) => {
+      const category = question.category;
+      if (!questionsByCategory[category]) {
+        questionsByCategory[category] = [];
+      }
+      questionsByCategory[category].push({
+        questionIndex: index,
+        question: question,
+      });
+    });
+
+    // Calculate percentage for each category
+    Object.keys(questionsByCategory).forEach((category) => {
+      const categoryQuestions = questionsByCategory[category];
+      let totalScore = 0;
+      const maxPossibleScore = categoryQuestions.length * 5; // Assuming max score is 5 per question
+
+      categoryQuestions.forEach(({ questionIndex }) => {
+        const answer = answers[questionIndex];
+        if (answer) {
+          totalScore += parseInt(answer);
+        }
+      });
+
+      // Calculate percentage (0-100)
+      const percentage =
+        maxPossibleScore > 0
+          ? Math.round((totalScore / maxPossibleScore) * 100)
+          : 0;
+
+      categoryResults[category] = {
+        category: category,
+        value: percentage,
+        totalQuestions: categoryQuestions.length,
+        totalScore: totalScore,
+        maxScore: maxPossibleScore,
+      };
+    });
+
+    return categoryResults;
+  };
+
   const handleNext = () => {
     if (currentQuestion < quizData.questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
+      // Calculate category-based results
+      const categoryResults = calculateCategoryResults();
+
+      // Convert to array format for API
+      const resultsArray = Object.values(categoryResults).map((result) => ({
+        category: result.category,
+        value: result.value,
+      }));
+
+      // Store both answers and calculated results
+      const quizResults = {
+        answers: answers,
+        categoryResults: resultsArray,
+        detailedResults: categoryResults,
+      };
+
+      // Store results (you can modify this to send to API)
+      console.log("Quiz Results:", quizResults);
+
       // Store answers in localStorage and navigate to details
-      localStorage.setItem("quizAnswers", JSON.stringify(answers));
+      localStorage.setItem("quizAnswers", JSON.stringify(quizResults));
       router.push("/details");
     }
   };
@@ -133,7 +207,7 @@ export default function QuizPage() {
               disabled={currentQuestion === 0}
               className="text-white hover:bg-white/10 disabled:opacity-50"
             >
-              <ChevronLeft className="w-4 h-4 mr-2" />
+              <ChevronLeft className="w-4 h-4" />
               Előző
             </Button>
 
@@ -144,18 +218,20 @@ export default function QuizPage() {
             <Button
               onClick={handleNext}
               disabled={!selectedOption}
-              className="bg-orange-600 hover:bg-orange-700 text-white disabled:opacity-50"
+              className="hover:bg-orange-700 text-white disabled:opacity-50"
+              style={{
+                background: "linear-gradient(to right, #8C5728, #CD935F)",
+              }}
             >
               {currentQuestion === quizData.questions.length - 1
                 ? "Befejezés"
                 : "Következő"}
-              <ChevronRight className="w-4 h-4 ml-2" />
+              <ChevronRight className="w-4 h-4" />
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
       {/* Footer */}
       <motion.footer
         initial={{ opacity: 0 }}

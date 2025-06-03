@@ -2,6 +2,7 @@ export const quizData = {
   questions: [
     {
       id: 1,
+      category: 'inspiráló_vízionárius',
       question:
         "Megfogalmaztam egy meggyőző szervezeti célt, mindenki ismeri, részben együtt is alakítottuk ki.",
       options: [
@@ -14,6 +15,7 @@ export const quizData = {
     },
     {
       id: 2,
+      category: 'elemző_stratéga',
       question:
         "Rendszeresen végzek alapos stratégiai elemzéseket, amelyek könyörtelen őszinteséggel vizsgálják a jelenlegi valóságot.",
       options: [
@@ -26,6 +28,7 @@ export const quizData = {
     },
     {
       id: 3,
+      category: 'új_technológiákat_adaptáló',
       question:
         "Egyértelmű stratégiai döntéseket hozok arról, hogy mely lehetőségeket használjuk ki és melyeket hagyjuk figyelmen kívül.",
       options: [
