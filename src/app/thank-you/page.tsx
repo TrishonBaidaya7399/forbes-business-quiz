@@ -46,7 +46,10 @@ export default function ThankYouPage() {
         >
           <Button
             onClick={handleReturnToSite}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-4 sm:px-8 py-3 text-base sm:text-lg rounded-md transition-all duration-300 transform hover:scale-105 whitespace-normal text-center w-full sm:w-auto max-w-xs sm:max-w-none mx-auto h-fit"
+            className="text-white px-8 py-3 text-lg rounded-sm h-[50px] min-h-[50px] transition-all duration-300 transform hover:scale-105 w-full"
+            style={{
+              background: "linear-gradient(to right, #8C5728, #CD935F)",
+            }}
           >
             Vissza a Forbes Business Club oldalára
           </Button>
