@@ -22,6 +22,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import dayjs from "dayjs";
 import { DatePicker } from "@/components/ui/datePicker";
+import { quizData } from "@/lib/quiz-data";
 
 interface SurveySubmission {
   name: string;
@@ -190,9 +191,10 @@ export default function AdminPage() {
       "Company",
       "Position",
       "Average Score",
-      "Terms Accepted",
       "Submitted At",
-      "Responses",
+      ...quizData.questions.map(
+        (q, index) => `Q${index + 1}: ${q.question.substring(0, 50)}...`
+      ),
     ];
     const csvData = filteredSubmissions.map((submission) => [
       submission.name,
@@ -200,9 +202,8 @@ export default function AdminPage() {
       submission.company,
       submission.position,
       submission.averageScore,
-      submission.termAndCondition ? "Yes" : "No",
       dayjs(submission.submittedAt).format("MMM DD, YYYY"),
-      JSON.stringify(submission.responses),
+      ...quizData.questions.map((q) => submission.responses[q.id] || ""),
     ]);
 
     const csvContent = [headers, ...csvData]
@@ -247,7 +248,7 @@ export default function AdminPage() {
         {/* Stats Cards */}
         {stats && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
-            <Card className="bg-black/40 backdrop-blur-sm border-white/20">
+            <Card className="bg-black/40 backdrop-blur-sm border-white/20 gap-0">
               <CardHeader className="pb-2">
                 <CardTitle className="text-white text-sm sm:text-base">
                   Total Submissions
@@ -260,7 +261,7 @@ export default function AdminPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-black/40 backdrop-blur-sm border-white/20">
+            <Card className="bg-black/40 backdrop-blur-sm border-white/20 gap-0">
               <CardHeader className="pb-2">
                 <CardTitle className="text-white text-sm sm:text-base">
                   Average Score
@@ -273,14 +274,14 @@ export default function AdminPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-black/40 backdrop-blur-sm border-white/20 sm:col-span-2 lg:col-span-1">
+            <Card className="bg-black/40 backdrop-blur-sm border-white/20 sm:col-span-2 lg:col-span-1 gap-0">
               <CardHeader className="pb-2">
                 <CardTitle className="text-white text-sm sm:text-base">
                   Top Companies
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-1">
+                <div className="space-y-1 max-h-[100px] overflow-y-auto">
                   {stats.submissionsByCompany
                     .slice(0, 3)
                     .map((company, index) => (
@@ -451,9 +452,9 @@ export default function AdminPage() {
                     <th className="text-left p-3 text-sm font-medium">
                       Avg Score
                     </th>
-                    <th className="text-left p-3 text-sm font-medium">
+                    {/* <th className="text-left p-3 text-sm font-medium">
                       Accept Terms & Condition
-                    </th>
+                    </th> */}
                     <th className="text-left p-3 text-sm font-medium">Date</th>
                   </tr>
                 </thead>
@@ -478,7 +479,7 @@ export default function AdminPage() {
                             {submission.averageScore.toFixed(1)}/5
                           </Badge>
                         </td>
-                        <td className="p-3 text-sm">
+                        {/* <td className="p-3 text-sm">
                           <Badge
                             variant={
                               submission.termAndCondition
@@ -493,7 +494,7 @@ export default function AdminPage() {
                           >
                             {submission.termAndCondition ? "Yes" : "No"}
                           </Badge>
-                        </td>
+                        </td> */}
                         <td className="p-3 text-sm">
                           {dayjs(submission.submittedAt).format("MMM DD, YYYY")}
                         </td>

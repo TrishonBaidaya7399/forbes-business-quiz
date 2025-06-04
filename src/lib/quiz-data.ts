@@ -2,7 +2,7 @@ export const quizData = {
   questions: [
     // Inspiráló vízionárius - 3 questions
     {
-      id: 1,
+      id: 0,
       category: "inspiráló_vízionárius",
       question:
         "Megfogalmaztam egy meggyőző szervezeti célt, mindenki ismeri, részben együtt is alakítottuk ki.",
@@ -15,7 +15,7 @@ export const quizData = {
       ],
     },
     {
-      id: 2,
+      id: 1,
       category: "inspiráló_vízionárius",
       question:
         "Hatékonyan fordítom le szervezeti célunkat csapat és egyéni célokká.",
@@ -28,7 +28,7 @@ export const quizData = {
       ],
     },
     {
-      id: 3,
+      id: 2,
       category: "inspiráló_vízionárius",
       question:
         "Olyan döntéseket hozok, amelyek összhangban vannak a céljainkkal és a értékrendünkkel, még akkor is, ha ez időnként kihívásokkal jár.",
@@ -43,7 +43,7 @@ export const quizData = {
 
     // Elemző stratéga - 3 questions
     {
-      id: 4,
+      id: 3,
       category: "elemző_stratéga",
       question:
         "Rendszeresen végzek alapos stratégiai elemzéseket, amelyek könyörtelen őszinteséggel vizsgálják a jelenlegi valóságot.",
@@ -56,7 +56,7 @@ export const quizData = {
       ],
     },
     {
-      id: 5,
+      id: 4,
       category: "elemző_stratéga",
       question:
         "Egyértelmű stratégiai döntéseket hozok arról, hogy mely lehetőségeket használjuk ki és melyeket hagyjuk figyelmen kívül.",
@@ -69,7 +69,7 @@ export const quizData = {
       ],
     },
     {
-      id: 6,
+      id: 5,
       category: "elemző_stratéga",
       question:
         "Biztosítom, hogy minden szervezeti tevékenység és erőforrás támogassa a választott stratégiánkat.",
@@ -84,7 +84,7 @@ export const quizData = {
 
     // Új technológiákat adaptáló - 3 questions
     {
-      id: 7,
+      id: 6,
       category: "új_technológiákat_adaptáló",
       question:
         "Világos technológiai víziót fogalmazok meg, ide értve az AI-t is, amelyből stratégiai előnyt kovácsolunk.",
@@ -97,7 +97,7 @@ export const quizData = {
       ],
     },
     {
-      id: 8,
+      id: 7,
       category: "új_technológiákat_adaptáló",
       question:
         "A befektetéseinket a legnagyobb stratégiai előnyt biztosító technológiák felé irányítom, miközben felkészülünk a jövő technológiákra.",
@@ -110,7 +110,7 @@ export const quizData = {
       ],
     },
     {
-      id: 9,
+      id: 8,
       category: "új_technológiákat_adaptáló",
       question:
         "Biztosítom, hogy a különböző technológiák összefüggő rendszerekként működjenek együtt, ne pedig elszigetelt megoldásokként.",
@@ -125,7 +125,7 @@ export const quizData = {
 
     // Operatív kiválóság - 3 questions
     {
-      id: 10,
+      id: 9,
       category: "operatív_kiválóság",
       question:
         "Hatékony munkafolyamatokat hozok létre, amelyek maximalizálják az értéket és minimalizálják a pazarlást.",
@@ -138,7 +138,7 @@ export const quizData = {
       ],
     },
     {
-      id: 11,
+      id: 10,
       category: "operatív_kiválóság",
       question:
         "Egyértelmű szerepköröket alakítok ki jól meghatározott felelősségekkel és döntési jogkörökkel a szervezet minden szintjén.",
@@ -151,7 +151,7 @@ export const quizData = {
       ],
     },
     {
-      id: 12,
+      id: 11,
       category: "operatív_kiválóság",
       question:
         "Olyan teljesítménymenedzsment rendszereket vezetek be, amelyek elszámoltathatóságot teremtenek és folyamatos fejlődésre ösztönöznek.",
@@ -166,7 +166,7 @@ export const quizData = {
 
     // Kapcsolatvarázsló - 3 questions
     {
-      id: 13,
+      id: 12,
       category: "kapcsolatvarázsló",
       question:
         "Következetesen építek bizalmat azzal, hogy minden interakckióban igyekszem gyakorolni az általam fontosnak tartott kompetenciákat és jellemvonásokat.",
@@ -179,7 +179,7 @@ export const quizData = {
       ],
     },
     {
-      id: 14,
+      id: 13,
       category: "kapcsolatvarázsló",
       question:
         "A legkülönbözőbb körülmények között, a különböző stílusú emberekkel is a célnak megfelelően, hatékonyan kommunikálok.",
@@ -192,7 +192,7 @@ export const quizData = {
       ],
     },
     {
-      id: 15,
+      id: 14,
       category: "kapcsolatvarázsló",
       question:
         "Konstruktívan kezelem a konfliktusokat, hogy erősítsem, ne pedig károsítsam a kapcsolatokat.",
@@ -207,7 +207,7 @@ export const quizData = {
 
     // Kultúraépítő - 3 questions
     {
-      id: 16,
+      id: 15,
       category: "kultúraépítő",
       question:
         "Világos értékeket fogalmazok meg és azokhoz tartom is magam - ezek határozzák meg a szervezeti identitásunkat és prioritásainkat.",
@@ -220,7 +220,7 @@ export const quizData = {
       ],
     },
     {
-      id: 17,
+      id: 16,
       category: "kultúraépítő",
       question:
         "Folyamatosan invesztálok a közösség építésébe és az együttműködés fejlesztésébe.",
@@ -233,7 +233,7 @@ export const quizData = {
       ],
     },
     {
-      id: 18,
+      id: 17,
       category: "kultúraépítő",
       question:
         "Kezelem azokat a viselkedéseket, amelyek ellentmondanak a cégesen kitűzött kultúrális jövőképünknek.",
@@ -248,7 +248,7 @@ export const quizData = {
 
     // Önismeret - 3 questions
     {
-      id: 19,
+      id: 18,
       category: "önismeret",
       question:
         "Rendszeresen gyakorlom az önreflexiót, hogy felismerjem a fejlődési lehetőségeimet, és jobban rálássak a saját céges működésemre.",
@@ -261,7 +261,7 @@ export const quizData = {
       ],
     },
     {
-      id: 20,
+      id: 19,
       category: "önismeret",
       question:
         "Kiemelt figyelmet fordítok fizikai, érzelmi, mentális és spirituális jóllétemre.",
@@ -274,7 +274,7 @@ export const quizData = {
       ],
     },
     {
-      id: 21,
+      id: 20,
       category: "önismeret",
       question:
         "Cselekedeteimet, az alapértékeimet és céljaimat folyamatosan összhangba hozom, hogy hiteles vezetői jelenlétet teremtsek.",
@@ -289,7 +289,7 @@ export const quizData = {
 
     // Változásvezető - 3 questions
     {
-      id: 22,
+      id: 21,
       category: "változásvezető",
       question:
         "Szisztematikusan figyelem a környezetet, hogy jól ismerhessem fel az iparági, tágabb piaci és társadalmi trendeket.",
@@ -302,7 +302,7 @@ export const quizData = {
       ],
     },
     {
-      id: 23,
+      id: 22,
       category: "változásvezető",
       question:
         "A változásokat tudatosan kezelem, gyorsan tanuló és adaptálódó szervezetet hoztam létre.",
@@ -315,7 +315,7 @@ export const quizData = {
       ],
     },
     {
-      id: 24,
+      id: 23,
       category: "változásvezető",
       question:
         "Ha egyszer valamit már elértünk, akkor azt a szintet jól tudjuk tartani, nem esünk vissza, onnan építkezünk tovább.",
