@@ -20,6 +20,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import dayjs from "dayjs";
+import { DatePicker } from "@/components/ui/datePicker";
 
 interface SurveySubmission {
   name: string;
@@ -43,8 +45,8 @@ interface Filters {
   email: string;
   company: string;
   position: string;
-  dateFrom: string;
-  dateTo: string;
+  dateFrom: Date | undefined;
+  dateTo: Date | undefined;
 }
 
 export default function AdminPage() {
@@ -60,8 +62,8 @@ export default function AdminPage() {
     email: "",
     company: "",
     position: "",
-    dateFrom: "",
-    dateTo: "",
+    dateFrom: undefined,
+    dateTo: undefined,
   });
 
   useEffect(() => {
@@ -131,10 +133,11 @@ export default function AdminPage() {
 
       const submissionDate = new Date(submission.submittedAt);
       const matchesDateFrom =
-        !filters.dateFrom || submissionDate >= new Date(filters.dateFrom);
+        !filters.dateFrom || submissionDate >= filters.dateFrom;
       const matchesDateTo =
         !filters.dateTo ||
-        submissionDate <= new Date(filters.dateTo + "T23:59:59");
+        submissionDate <=
+          new Date(filters.dateTo.getTime() + 24 * 60 * 60 * 1000 - 1);
 
       return (
         matchesName &&
@@ -155,7 +158,10 @@ export default function AdminPage() {
 
   const totalPages = Math.ceil(filteredSubmissions.length / pageSize);
 
-  const handleFilterChange = (key: keyof Filters, value: string) => {
+  const handleFilterChange = (
+    key: keyof Filters,
+    value: string | Date | undefined
+  ) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
     setCurrentPage(1); // Reset to first page when filtering
   };
@@ -166,8 +172,8 @@ export default function AdminPage() {
       email: "",
       company: "",
       position: "",
-      dateFrom: "",
-      dateTo: "",
+      dateFrom: undefined,
+      dateTo: undefined,
     });
     setCurrentPage(1);
   };
@@ -195,7 +201,7 @@ export default function AdminPage() {
       submission.position,
       submission.averageScore,
       submission.termAndCondition ? "Yes" : "No",
-      new Date(submission.submittedAt).toLocaleString(),
+      dayjs(submission.submittedAt).format("MMM DD, YYYY"),
       JSON.stringify(submission.responses),
     ]);
 
@@ -207,9 +213,7 @@ export default function AdminPage() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `forbes-survey-results-${
-      new Date().toISOString().split("T")[0]
-    }.csv`;
+    a.download = `forbes-survey-results-${dayjs().format("YYYY-MM-DD")}.csv`;
     a.click();
     window.URL.revokeObjectURL(url);
   };
@@ -370,26 +374,20 @@ export default function AdminPage() {
                   <label className="text-white text-sm mb-2 block">
                     Date From
                   </label>
-                  <Input
-                    type="date"
-                    value={filters.dateFrom}
-                    onChange={(e) =>
-                      handleFilterChange("dateFrom", e.target.value)
-                    }
-                    className="bg-black/20 border-white/30 text-white"
+                  <DatePicker
+                    date={filters.dateFrom}
+                    onSelect={(date) => handleFilterChange("dateFrom", date)}
+                    placeholder="Select start date"
                   />
                 </div>
                 <div>
                   <label className="text-white text-sm mb-2 block">
                     Date To
                   </label>
-                  <Input
-                    type="date"
-                    value={filters.dateTo}
-                    onChange={(e) =>
-                      handleFilterChange("dateTo", e.target.value)
-                    }
-                    className="bg-black/20 border-white/30 text-white"
+                  <DatePicker
+                    date={filters.dateTo}
+                    onSelect={(date) => handleFilterChange("dateTo", date)}
+                    placeholder="Select end date"
                   />
                 </div>
               </div>
@@ -497,9 +495,7 @@ export default function AdminPage() {
                           </Badge>
                         </td>
                         <td className="p-3 text-sm">
-                          {new Date(
-                            submission.submittedAt
-                          ).toLocaleDateString()}
+                          {dayjs(submission.submittedAt).format("MMM DD, YYYY")}
                         </td>
                       </tr>
                     ))
