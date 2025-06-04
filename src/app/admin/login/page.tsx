@@ -32,7 +32,7 @@ export default function AdminLoginPage() {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/login`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`,
         {
           method: "POST",
           headers: {

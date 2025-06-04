@@ -12,7 +12,13 @@ import {
   ChevronRight,
   Filter,
 } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 
 interface SurveySubmission {
@@ -308,7 +314,7 @@ export default function AdminPage() {
 
         {/* Filters */}
         {showFilters && (
-          <Card className="bg-black/40 backdrop-blur-sm border-white/20 mb-6">
+          <Card className="bg-black/40 backdrop-blur-sm border-white/20 mb-4">
             <CardHeader>
               <CardTitle className="text-white text-lg">Filters</CardTitle>
             </CardHeader>
@@ -444,8 +450,12 @@ export default function AdminPage() {
                     <th className="text-left p-3 text-sm font-medium">
                       Position
                     </th>
-                    <th className="text-left p-3 text-sm font-medium">Score</th>
-                    <th className="text-left p-3 text-sm font-medium">Terms</th>
+                    <th className="text-left p-3 text-sm font-medium">
+                      Avg Score
+                    </th>
+                    <th className="text-left p-3 text-sm font-medium">
+                      Accept Terms & Condition
+                    </th>
                     <th className="text-left p-3 text-sm font-medium">Date</th>
                   </tr>
                 </thead>
@@ -467,7 +477,7 @@ export default function AdminPage() {
                             variant="secondary"
                             className="bg-orange-600/20 text-orange-400"
                           >
-                            {submission.averageScore}/5
+                            {submission.averageScore.toFixed(1)}/5
                           </Badge>
                         </td>
                         <td className="p-3 text-sm">
