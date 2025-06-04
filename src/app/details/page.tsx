@@ -12,12 +12,14 @@ import {
   sendResultEmail,
 } from "@/lib/api-service";
 import { toast } from "sonner";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface FormData {
   name: string;
   email: string;
   company: string;
   position: string;
+  termAndCondition: boolean;
 }
 
 export default function DetailsPage() {
@@ -31,7 +33,15 @@ export default function DetailsPage() {
     formState: { errors },
     setError,
     clearErrors,
-  } = useForm<FormData>();
+    watch,
+    setValue,
+  } = useForm<FormData>({
+    defaultValues: {
+      termAndCondition: false,
+    },
+  });
+
+  const watchTermAndCondition = watch("termAndCondition");
 
   const validateEmailAddress = (email: string): boolean => {
     const validation = validateEmailFormat(email);
@@ -59,6 +69,16 @@ export default function DetailsPage() {
         return;
       }
 
+      // Validate terms and conditions
+      if (!data.termAndCondition) {
+        setError("termAndCondition", {
+          type: "manual",
+          message: "A GDPR feltételek elfogadása kötelező",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
       // Get survey answers from localStorage
       const answersJson = localStorage.getItem("quizAnswers");
       if (!answersJson) {
@@ -82,6 +102,7 @@ export default function DetailsPage() {
         ...data,
         responses: rawAnswers, // Send only the answers part
         averageScore: averageScore,
+        termAndCondition: data.termAndCondition, // Pass the boolean value
       });
 
       if (!saveResponse.success) {
@@ -113,6 +134,7 @@ export default function DetailsPage() {
       setIsSubmitting(false);
     }
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <motion.div
@@ -123,11 +145,11 @@ export default function DetailsPage() {
       >
         <div className="border-[3px] border-l-[1px] border-orange-500 rounded-lg">
           <div className="bg-black/40 backdrop-blur-sm p-8 rounded-xl relative z-10">
-            <h1 className="text-white text-2xl font-bold mb-2 text-center">
+            <h1 className="text-white text-2xl font-bold mb-2">
               Kérem az eredményemet!
             </h1>
 
-            <p className="text-white/80 text-sm mb-6 text-center">
+            <p className="text-white/80 text-sm mb-6">
               Az alábbi adatok megadása után elküldjük az Ön személyre szabott
               értékelését az adaptív vezető felmérés alapján.
             </p>
@@ -208,10 +230,41 @@ export default function DetailsPage() {
                 )}
               </div>
 
+              {/* GDPR Terms and Conditions Checkbox */}
+              <div className="flex items-start space-x-3">
+                <Checkbox
+                  id="termAndCondition"
+                  checked={watchTermAndCondition}
+                  onCheckedChange={(checked) => {
+                    setValue("termAndCondition", checked as boolean);
+                    if (checked) {
+                      clearErrors("termAndCondition");
+                    }
+                  }}
+                  className="mt-1 border-white/30 data-[state=checked]:bg-orange-600 data-[state=checked]:border-orange-600"
+                />
+                <div className="flex-1">
+                  <label
+                    htmlFor="termAndCondition"
+                    className="text-white text-sm cursor-pointer"
+                  >
+                    Elfogadom a GDPR feltételeit *
+                  </label>
+                  {errors.termAndCondition && (
+                    <p className="text-red-400 text-xs mt-1">
+                      {errors.termAndCondition.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 text-lg disabled:opacity-50"
+                className="text-white px-8 py-3 text-lg rounded-sm h-[50px] min-h-[50px] transition-all duration-300 transform hover:scale-105 w-full"
+                style={{
+                  background: "linear-gradient(to right, #8C5728, #CD935F)",
+                }}
               >
                 {isSubmitting ? "Küldés..." : "Küldés"}
               </Button>

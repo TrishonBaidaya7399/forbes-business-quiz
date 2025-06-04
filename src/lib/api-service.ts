@@ -42,6 +42,7 @@ export interface UserSubmissionData {
   position: string;
   responses: Record<number, string>;
   averageScore: number;
+  termAndCondition: boolean;
 }
 
 // Simple client-side email validation
