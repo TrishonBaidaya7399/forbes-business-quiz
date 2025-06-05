@@ -46,7 +46,7 @@ export default function ThankYouPage() {
         >
           <Button
             onClick={handleReturnToSite}
-            className="text-white px-8 py-3 text-lg rounded-sm h-[50px] min-h-[50px] transition-all duration-300 transform hover:scale-105 w-full"
+            className="text-white px-8 py-3 text-lg rounded-sm h-[50px] min-h-[50px] transition-all duration-300 transform hover:scale-105 w-full max-w-[420px]"
             style={{
               background: "linear-gradient(to right, #8C5728, #CD935F)",
             }}
